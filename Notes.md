@@ -20,3 +20,6 @@
 
 
 
+### To create a new Angular project:
+    ng new <project_name> --prefix <some_prefix_is_optional>
+
