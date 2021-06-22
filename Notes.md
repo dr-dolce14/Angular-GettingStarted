@@ -16,6 +16,11 @@
             
             - Metadata
                 -> provides additional info about the component to Angular
+                -> defined with a DECORATOR 
+                                    |->  *function that adds metadata to a class, its members, or its method arguments;
+                                         *scope is limited to the feature that it decorates
+                                         *always prefixed with @
+                                         *several built-in, like @Component
 
 
 
@@ -23,3 +28,7 @@
 ### To create a new Angular project:
     ng new <project_name> --prefix <some_prefix_is_optional>
 
+
+### AppModule 
+    - provides organization boundaries
+    - template resolution environment
