@@ -13,3 +13,7 @@ import { AppComponent } from './app.component';
   bootstrap: [AppComponent] //startup component of our application; should contain selector we use in index.html file
 })
 export class AppModule { }
+
+
+
+// this bootstraps our app component
