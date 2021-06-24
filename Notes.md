@@ -32,3 +32,9 @@
 ### AppModule 
     - provides organization boundaries
     - template resolution environment
+
+
+### Property Binding:
+    <img [src] = 'product.imageUrl'>
+    ( compare this to Interpolation --> <img src={{product.imageUrl}}> )
+
