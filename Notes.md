@@ -38,3 +38,38 @@
     <img [src] = 'product.imageUrl'>
     ( compare this to Interpolation --> <img src={{product.imageUrl}}> )
 
+
+### Example of CUSTOM PIPE
+- put this in a shared folder (or whatever folder your component that needs it is in, if it's just one component that needs it)...call it something like convert-to-spaces.pipe.ts (for this example)
+
+import { PipeTransform } from "@angular/core";
+import { Pipe } from "@angular/core";
+
+@Pipe({
+    name: 'convertToSpaces'
+})
+
+export class ConvertToSpacesPipe implements PipeTransform {
+
+    transform(value: string, character: string): string {
+        return value.replace(character, ' ')
+    }
+
+}
+
+
+### Lifecycle hooks
+
+2.    import { Component, OnInit } from '@angular/core';
+
+1.    export class ProductListComponent implements OnInit {
+        pageTitle: string = 'Product List';
+        showImage: boolean = false;
+        listFilter: string = 'cart';
+        products: IProduct[] = [...]
+    }
+
+3.    ngOnInit(): void {
+        console.log('In OnInit');
+      }
+    }
