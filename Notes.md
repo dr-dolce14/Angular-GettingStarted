@@ -98,6 +98,7 @@ export class ConvertToSpacesPipe implements PipeTransform {
     templateUrl: './star.component.html'
 
 })
+
 export class StarComponent {
 
     @Input() rating: number; 
@@ -178,3 +179,79 @@ export class StarComponent implements OnChanges {
     this.pageTitle = 'Product List: ' + message;
 
 }
+
+
+### Services
+
+-Building a service involves four steps:
+1. Create a file, like product.service.ts
+2. Create the service class (use PascalCasing and append “Service” to the name)
+3. Define the metadata with a decorator (the @Injectable decorator)
+4. Import what we need
+
+-in product.service.ts
+
+import { Injectable } from "@angular/core";
+
+import { IProduct } from "./product";
+
+@Injectable({
+
+    providedIn: 'root'
+
+})
+
+export class ProductService {
+
+    getProducts(): IProduct[] {
+
+        return [...list of products...]
+    }
+
+}
+
+-Registering the service
+	-> use Root application injector if the service is used throughout the application 
+			-> in @Injectable decorator, set the providedIn property to ‘root’
+
+	-> specific component’s injector if only that component uses the service
+			-> in the component’s decorator, set the providers property to the service
+
+
+-In any class that needs the service, specify the service as a DEPENDENCY
+	-> use a CONSTRUCTOR parameter to define the dependency 
+	-> the service will be injected when the component is instantiated
+
+-in product-list.component.ts
+
+Import statements....
+
+@Component ({...selector, templateUrl, etc.})
+
+export class ProductListComponent implements OnInit {
+
+    declarations of data types...
+
+    setter and getter ....
+
+    filteredProducts: IProduct[] = [];
+
+    products: IProduct[] = [];
+
+    constructor (private productService: ProductService) {}
+
+
+    (then to get the data from the service upon initialization of component:)
+
+    ngOnInit(): void {
+
+    this.products = this.productService.getProducts();
+
+    this.filteredProducts = this.products;
+    
+  }
+
+
+}
+
+
