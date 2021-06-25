@@ -63,16 +63,24 @@ export class ConvertToSpacesPipe implements PipeTransform {
 2.    import { Component, OnInit } from '@angular/core';
 
 1.    export class ProductListComponent implements OnInit {
+
         pageTitle: string = 'Product List';
         showImage: boolean = false;
         listFilter: string = 'cart';
         products: IProduct[] = [...]
+
     }
 
 3.    ngOnInit(): void {
+
         console.log('In OnInit');
+
       }
     }
+
+
+
+
 
 ### Nesting Components
 
@@ -83,15 +91,19 @@ export class ConvertToSpacesPipe implements PipeTransform {
     templateUrl: './star.component.html'
 })
 export class StarComponent {
+
     @Input() rating: number; 
     cropWidth: number;
+
 }
 
 -Then use property binding to pass data from the container to the nested component:
 in product-list.component.html (this is the container component in which the star component is nested)
-<td>
-    <pm-star [rating]='product.starRating'></pm-star>
-</td>
+
+    <td>
+        <pm-star [rating]='product.starRating'></pm-star>
+    </td>
+
 
 ** The container component can ONLY bind to a nested component property marked with the @Input decorator (so only the 'rating' property above)
 
@@ -102,48 +114,58 @@ in product-list.component.html (this is the container component in which the sta
     -> an event is defined with an EVENT EMITTER OBJECT and data passed along with it. 
 
 @Component({
+
     selector: 'pm-star',
     templateUrl: './star.component.html',
     styleUrls: ['./star.component.css']
+
 })
+
 export class StarComponent implements OnChanges {
+
     @Input() rating: number = 0;
     cropWidth: number = 75;
     @Output() ratingClicked: EventEmitter<string> =
         new EventEmitter<string>();
-
+        
+}
 
 -Then in the template of the nested component, you would add the (click) event to call on an OnClick() function
 
-<div class="crop"
-     [style.width.px]="cropWidth"
-     [title]="rating"
-     (click) = 'onClick()'>
-  <div style="width: 75px">
-    <span class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
-  </div>
-</div>
+    <div class="crop"
+            [style.width.px]="cropWidth"
+            [title]="rating"
+            (click) = 'onClick()'>
+        <div style="width: 75px">
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+        </div>
+    </div>
 
 -The onClick() function is defined in the nested component class:
  
  onClick(): void {
-    this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
+
+    this.ratingClicked.emit('The rating ${this.rating} was clicked!); 
+
 }
+(but use BACKTICKS INSTEAD OF SINGLE QUOTES)
 
 -Then with data binding (but using parentheses this time to signify two-way binding), you would bind the ratingClicked property to the container component's template and assign it a function that would be defined in the container component's class...here it is onRatingClicked. 
 
 
-<td>
-    <pm-star [rating]='product.starRating'
-    (ratingClicked)='onRatingClicked($event)'>
-    </pm-star>
-</td>
+    <td>
+        <pm-star [rating]='product.starRating'
+        (ratingClicked)='onRatingClicked($event)'>
+        </pm-star>
+    </td>
 
 *** the ($event) means that data is being transmitted via that event emitter
 
 -Then the onRatingClicked() function needs to be defined in the container component's class:
 
  onRatingClicked(message: string): void {
+
     this.pageTitle = 'Product List: ' + message;
+    
 }
