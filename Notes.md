@@ -122,9 +122,6 @@ export class StarComponent implements OnChanges {
   <div style="width: 75px">
     <span class="fa fa-star"></span>
     <span class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
-    <span class="fa fa-star"></span>
   </div>
 </div>
 
@@ -136,10 +133,7 @@ export class StarComponent implements OnChanges {
 
 -Then with data binding (but using parentheses this time to signify two-way binding), you would bind the ratingClicked property to the container component's template and assign it a function that would be defined in the container component's class...here it is onRatingClicked. 
 
-<td>{{ product.productName }}</td>
-<td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
-<td>{{ product.releaseDate }}</td>
-<td>{{ product.price | currency: 'USD':'symbol':'1.2-2' }}</td>
+
 <td>
     <pm-star [rating]='product.starRating'
     (ratingClicked)='onRatingClicked($event)'>
