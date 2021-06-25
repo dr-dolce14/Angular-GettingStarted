@@ -58,6 +58,9 @@ export class ConvertToSpacesPipe implements PipeTransform {
 }
 
 
+
+
+
 ### Lifecycle hooks
 
 2.    import { Component, OnInit } from '@angular/core';
@@ -82,13 +85,18 @@ export class ConvertToSpacesPipe implements PipeTransform {
 
 
 
+
+
+
 ### Nesting Components
 
 -When passing data TO a nested component, use the @Input decorator:
 
 @Component({
+
     selector: 'pm-star',
     templateUrl: './star.component.html'
+
 })
 export class StarComponent {
 
@@ -149,6 +157,7 @@ export class StarComponent implements OnChanges {
     this.ratingClicked.emit('The rating ${this.rating} was clicked!); 
 
 }
+
 (but use BACKTICKS INSTEAD OF SINGLE QUOTES)
 
 -Then with data binding (but using parentheses this time to signify two-way binding), you would bind the ratingClicked property to the container component's template and assign it a function that would be defined in the container component's class...here it is onRatingClicked. 
@@ -167,5 +176,5 @@ export class StarComponent implements OnChanges {
  onRatingClicked(message: string): void {
 
     this.pageTitle = 'Product List: ' + message;
-    
+
 }
