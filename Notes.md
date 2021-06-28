@@ -335,4 +335,55 @@ export class ProductListComponent implements OnInit {
 				</ul>
 				<router-outlet></router-outlet>
 
+    - Miscellaneous stuff with regards to Routing
+
+		-> Safe navigation operator = ?
+			-guards against null and undefined values when navigating an object’s properties
+			-if the product object is null or undefined, this operator returns null and does not attempt to access the property (no undefined property error)
+			- example: product?.productName
+			- does not work with ngModel two-way binding
+			- can also be tedious when displaying many properties
+
+		->To activate a route with CODE
+
+			-use the ROUTER SERVICE and define it as a dependency on the constructor (import into the class
+	        in which you need to use the route)
+
+			-create a method that calls the navigate method of the Router service and pass in the link parameters
+	        array
+			
+			import { Router } from ‘@angular/core’;
+			…
+			constructor(private router: Router) { }
+			onBack(): void {
+				this.router.navigate([‘/products’]);
+			}
+
+			-add a user interface element and use event binding to bind to the created method
+
+				<button (click)=‘onBack( )’>Back</button>
+
+
+-PROTECTING ROUTES WITH GUARDS
+
+	-> Build a guard service
+		-Implement the guard type (CanActivate)
+		-Create the method (canActivate()) 
+		-Register the guard service provider
+			-use the providedIn property
+			
+			import { Injectable } from ‘@angular/core’;
+			import { CanActivate } from ‘@angular/router’;
+
+			@Injectable ({ 
+				providedIn: ‘root’
+			})
+			export class ProductDetailGuard implements CanActivate {
+				canActivate(): boolean {…}
+			}
+
+		-Add the guard to the desired route
+	
+		{ path: ‘products/:id’, canActivate: [ ProductDetailGuard ], component: ProductDetailComponent }
+
 
