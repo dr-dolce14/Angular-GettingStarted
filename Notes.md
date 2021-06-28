@@ -264,6 +264,75 @@ export class ProductListComponent implements OnInit {
             --> call on HttpClient in constructor
     - in the component that needs the data from the backend (or url), you need to SUBSCRIBE to that observable (ngOnInit) and then UNSUBSCRIBE as well (ngOnDestroy)
 
+    1. next = occurs when next item is emitted (and provides emitted item…like tracking key presses, each time a key is pressed, the observable emits a next notification and provides the pressed character)
+	2. error = an error occurred (error info provided) and no more items are emitted
+	3. complete = if there are no more items to emit
 
+
+		-> we can pipe emitted items through a set of operators to modify/transform them (lowercase, etc)
+			-would have to import Observable and operators, example (see screenshot in Getting Started note):
+				import { Observable } from ‘rxjs’;
+				import { map, filter } from ‘rxjs/operators’
+
+
+
+
+
+
+### Routing
+    —> to create a new component using the CLI (will automatically updated app module):
+		- ng g c products/product-detail - - flat
+			—> g = generate
+			—> c = component
+			—> products/product-detail = path where we want our component, product-detail, to sit
+			—> two dashes followed by flat = do not create a folder specifically for this component
+
+<router-outlet> directive get placed in the host component’s template; the routed component’s view then appears in this location
+		->Whenever a route is activated, the associated component’s view is displayed here
+
+	-CHECKLIST FOR ROUTING
+
+		-> 	Define base element (in index.html, usually)
+				<head>
+					…
+					<base href=“/“>
+				</head>
+
+		-> Add RouterModule
+			@NgModule({
+				imports: […,
+					RouterModule.forRoot([ ])
+				],
+				declarations: […],
+				bootstrap: [ AppComponent]
+			})
+			export class AppModule { }
+
+		-> Add each route to forRoot array
+			RouterModule.forRoot([
+				{ path: ‘products’, component: ProductListComponent },
+				{ path: ‘products/:id’, component: ProductDetailComponent },
+				{ path: ‘welcome’, component: WelcomeComponent},
+				{ path: ‘’, redirectTo: ‘welcome’, pathMatch: ‘full’ },
+				{ path: ‘**’, redirectTo: ‘welcome’, pathMatch: ‘full’ }
+			])
+
+		-> Identify which actions to tie to which routes
+		-> Add the RouterLink directive as an attribute to any clickable element in a component’s template
+			(bind to a link parameters array where first element is the path and all other elements are route 
+			parameters)
+				<ul>
+					<li><a [routerLink]=“[‘/welcome’]”>Home</a></li>
+					<li><a [routerLink]=“[‘/products’]”>Product List</a></li>
+				</ul>
+			
+
+		-> Add the RouterOutlet directive to identify where to display the routed component’s view (most often 
+	specified in the host component’s template)
+				<ul>
+					<li><a [routerLink]=“[‘/welcome’]”>Home</a></li>
+					<li><a [routerLink]=“[‘/products’]”>Product List</a></li>
+				</ul>
+				<router-outlet></router-outlet>
 
 
