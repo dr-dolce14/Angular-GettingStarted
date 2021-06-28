@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http'
+
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
@@ -16,7 +18,8 @@ import { StarComponent } from './shared/star.component';
   ],
   imports: [ // external modules that we want to have available to all components that belong to this module
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent] //startup component of our application; should contain selector we use in index.html file
 })

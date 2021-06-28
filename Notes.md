@@ -255,3 +255,15 @@ export class ProductListComponent implements OnInit {
 }
 
 
+
+### Observables
+
+    - collection of items over time, used to deal with HTTP requests
+    - need to use rxjs library
+    - create a method in the SERVICE class to deal with observables emitted and any errors
+            --> call on HttpClient in constructor
+    - in the component that needs the data from the backend (or url), you need to SUBSCRIBE to that observable (ngOnInit) and then UNSUBSCRIBE as well (ngOnDestroy)
+
+
+
+
