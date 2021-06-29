@@ -287,7 +287,7 @@ export class ProductListComponent implements OnInit {
 			—> products/product-detail = path where we want our component, product-detail, to sit
 			—> two dashes followed by flat = do not create a folder specifically for this component
 
-<router-outlet> directive get placed in the host component’s template; the routed component’s view then appears in this location
+	<router-outlet> directive get placed in the host component’s template; the routed component’s view then appears in this location
 		->Whenever a route is activated, the associated component’s view is displayed here
 
 	-CHECKLIST FOR ROUTING
@@ -387,3 +387,52 @@ export class ProductListComponent implements OnInit {
 		{ path: ‘products/:id’, canActivate: [ ProductDetailGuard ], component: ProductDetailComponent }
 
 
+### Modules
+
+	->A class with an NgModule decorator
+	->organize the pieces of an app -> arrange them into blocks
+	->extend the app with capabilities from external libraries
+	->provide a template resolution environment
+	->aggregate classes and re-export
+
+	-Every app must bootstrap at least one component, the root application component
+	-The bootstrap array should only be used in the root application module, AppModule
+	
+	-DECLARATIONS ARRAY:
+		->to define the components, directives and pipes that belong to a module
+		->every comp, directive and pipe that is created must belong to ONE AND ONLY ONE angular module
+		->only declare components, directives, pipes
+		->all components, directives, pipes are private by default and only accessible to other components, 
+	directives, pipes declared in the same module (can share by exporting)
+		->the angular module provides the template resolution environment for its component templates
+	
+	-EXPORTS ARRAY:
+		->allows us to share a module’s components, directives and pipes with other modules
+		->can re-export modules to re-export components, directives, pipes
+		->can export something without including it in the imports array
+		->is often only used by the Shared Module
+		
+	-IMPORTS ARRAY:
+		->can import modules (even 3rd party) to use capabilities
+		-> for each component declared in the module, add to the imports array what is needed by the 
+	component’s template
+		->importing a module does NOT provide access to its imported modules (imports are NOT INHERITED) 
+	unless a module re-exported its imported modules
+		->use the imports array to register services provided by Angular or third-party modules (usually, we import 
+	module in the AppModule to ensure its services are registered one time)
+
+	
+	- to create a new module using the CLI
+
+	ng g m products/product - -flat -m app
+		->g = generate
+		->m = module
+		->products/product = put it in the products folder and call it ProductModule
+		-> - -flat = do not create a folder for it
+		-> -m app = add it to the imports array of AppModule
+
+	when not adding to AppModule:  ng g m shared/shared --flat -m products/product.module
+
+	-SHARED MODULE
+		->organize commonly used pieces of our application
+		->export those pieces to share them
