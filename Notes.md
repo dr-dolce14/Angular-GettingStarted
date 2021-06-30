@@ -470,9 +470,11 @@ export class ProductListComponent implements OnInit {
 
 
 ### Final notes on Data Binding
+		            
+		     DOM <-  Interpolation {{ pageTitle }}  COMPONENT
 
-DOM															            COMPONENT
-		     <-  Interpolation {{ pageTitle }}
-			 <-  Property Binding <img [src]='product.imageUrl'>
-				Event Binding <button (click)='toggleImage()'>   ->
-			 <- Two-way Binding <input [(ngModel)]='listFilter'/>  ->
+			 DOM <-  Property Binding <img [src]='product.imageUrl'>  COMPONENT
+
+		 	 DOM	Event Binding <button (click)='toggleImage()'>   ->  COMPONENT
+
+			 DOM <- Two-way Binding <input [(ngModel)]='listFilter'/>  -> COMPONENT
