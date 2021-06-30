@@ -467,3 +467,12 @@ export class ProductListComponent implements OnInit {
 							files b/c the hashed file names will not match the cached file names
 
 		-> a dist folder will be created with all the bundles
+
+
+### Final notes on Data Binding
+
+DOM															            COMPONENT
+		     <-  Interpolation {{ pageTitle }}
+			 <-  Property Binding <img [src]='product.imageUrl'>
+				Event Binding <button (click)='toggleImage()'>   ->
+			 <- Two-way Binding <input [(ngModel)]='listFilter'/>  ->
