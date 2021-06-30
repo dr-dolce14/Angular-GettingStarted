@@ -436,3 +436,34 @@ export class ProductListComponent implements OnInit {
 	-SHARED MODULE
 		->organize commonly used pieces of our application
 		->export those pieces to share them
+
+
+
+### Angular CLI
+
+	-uses SCHEMATICS
+		-> a template-based code generator that supports complex logic
+		-> a set of instructions for transforming a software project by generating or modifying code (like a 
+	(blueprint)
+		-> examples: 
+			Components: ng g c <name>
+			Directives: ng g d <name>
+			Route guards: ng g g <name>
+			Interfaces: ng g i <name>
+			Modules: ng g m <name>
+			Pipes: ng g p <name>
+			Services: ng g s <name>
+	
+	-can test code with ng test
+	
+	-Building the app
+		-> need to do some “tree shaking”…cleaning up code (get rid of dead branches)
+		-> ng build does this for us
+		-> bundles returned have a hash…this is done for CACHE BUSTING
+								-> every time we change something in our code it needs to be redeployed
+							to the server…we expect new version of files to be downloaded by the browser when
+							a user access our app…for performance reasons, the browser may have cached 
+							those files…by appending a hash, the browser will download the latest version of 
+							files b/c the hashed file names will not match the cached file names
+
+		-> a dist folder will be created with all the bundles
